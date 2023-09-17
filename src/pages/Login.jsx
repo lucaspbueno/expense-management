@@ -1,27 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-import LoginImg from '../images/LoginScreen.png';
+import { useSelector } from 'react-redux';
+import InitialPage from '../components/InitialPage';
+import LoginForm from '../components/LoginForm';
+import Error from '../components/Error';
 
 function Login() {
-  const navigate = useNavigate();
-  const handleCLick = () => {
-    navigate('/login');
-  };
-
+  const { showError, isBlur } = useSelector((state) => state.Login);
   return (
-    <div className="h-screen flex flex-col justify-between p-4">
-      <img src={ LoginImg } alt="Login screen background" />
-      <section>
-        <h1>Login</h1>
-        <h2>Welcome back, we missed you</h2>
-      </section>
-      <button
-        type="button"
-        className="btn btn-outline btn-primary"
-        onClick={ handleCLick }
-      >
-        Sign in
-      </button>
-    </div>
+    <section
+      className={ `flex transition-filter duration-300 ease-out
+      ${isBlur && 'sm:filter-blur-[7px] sm:bg-lightGray'}` }
+    >
+      <InitialPage />
+      <article className="w-screen hidden lg:flex">
+        <LoginForm />
+      </article>
+      { showError && <Error /> }
+    </section>
   );
 }
 
