@@ -18,7 +18,7 @@ function Expense() {
       <main className="w-screen flex">
         <section>
           <SideBar />
-          <Filters />
+          {/* <Filters /> */}
         </section>
         <ExpenseTable />
       </main>
