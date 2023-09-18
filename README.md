@@ -1,6 +1,6 @@
 ## Sobre o projeto:
   -É uma aplicação focada no conceito de CRUD, criada em React.js utilizando o
-  create-react-app, para estilo da página foi usado o Tailwidn e o DaisyUi,
+  create-react-app, para estilo da página foi usado o Tailwind e o DaisyUi,
   para as rotas o React Router e para gerenciar o estado foi utilizado o Redux.
 
   ** O back-end e o banco de dados dessa aplicação não foram feitos.
