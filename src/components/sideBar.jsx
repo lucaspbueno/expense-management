@@ -1,8 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { MenuItem, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { loadingCurrencies } from '../Redux/actions/expenseActions';
+import {
+  addExpense,
+  loadingCurrencies,
+  showErrorExpense,
+  toggleSideBar,
+} from '../Redux/actions/expenseActions';
 import fetchApi from '../services/api';
+import Input from './Input';
+import Select from './Select';
+import Error from './Error';
+import Alert from './Alert';
 
 function SideBar() {
   const [form, setForm] = useState({
@@ -15,7 +23,10 @@ function SideBar() {
   });
   const { valor, currency, description, paymentMethod, date } = form;
   const dispatch = useDispatch();
-  const { showSideBar, exchangeRates } = useSelector((state) => state.Expense);
+  const {
+    showSideBar,
+    exchangeRates,
+    showError } = useSelector((state) => state.Expense);
 
   const handleChange = ({ target: { name, value } }) => {
     setForm({
@@ -34,92 +45,103 @@ function SideBar() {
   }, []);
 
   const verifyForm = () => {
-    if (!valor)
+    if (!valor || !currency || !description || !paymentMethod || !date) {
+      dispatch(showErrorExpense(true));
+      return false;
+    }
+    dispatch(showErrorExpense(false));
+    return true;
   };
 
   const handleClick = () => {
-
+    const isFormValid = verifyForm(); // Verifica se o formulário é válido
+    if (isFormValid) {
+      dispatch(addExpense(form));
+      setForm({
+        valor: '',
+        currency: '',
+        description: '',
+        paymentMethod: '',
+        date: '',
+        id: form.id + 1,
+      });
+      dispatch(toggleSideBar(false));
+    }
   };
 
+  const arr = ['Money', 'Credit Card', 'Debit Card'];
+
   return (
-    <aside
-      className={ `sm:flex
-    ${!showSideBar && 'hidden'} h-screen` }
-    >
-      <form className="w-screen h-full flex flex-col pr-6 pt-0 pl-6">
-        <TextField
-          margin="normal"
-          type="number"
-          name="valor"
-          value={ valor }
-          onChange={ handleChange }
-          label="Value"
-        />
+    <>
+      <aside
+        className={ `w-full sm:flex
+      transition-filter duration-300 ease-out
+      ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}
+      ${!showSideBar && 'hidden'}` }
+      >
+        <form className="h-screen flex flex-col justify-between p-5">
+          <div>
+            <Input
+              type="number"
+              name="valor"
+              value={ valor }
+              placeholder="Value"
+              handleChange={ handleChange }
+              showError={ showError }
+            />
 
-        <TextField
-          margin="normal"
-          select
-          name="currency"
-          value={ currency }
-          onChange={ handleChange }
-          label="Currency"
-          defaultValue="EUR"
-        >
-          {
-            exchangeRates && exchangeRates.map((currencyState) => (
-              <MenuItem
-                key={ currencyState }
-                value={ currencyState }
-              >
-                {currencyState }
-              </MenuItem>
-            ))
-          }
-        </TextField>
+            <Select
+              name="currency"
+              value={ currency }
+              handleChange={ handleChange }
+              firstItem="Choose a currency"
+              array={ exchangeRates }
+            />
 
-        <TextField
-          margin="normal"
-          type="text"
-          name="description"
-          value={ description }
-          onChange={ handleChange }
-          label="Description"
-        />
+            <Input
+              type="text"
+              name="description"
+              value={ description }
+              placeholder="Description"
+              handleChange={ handleChange }
+              showError={ showError }
+            />
 
-        <TextField
-          margin="normal"
-          select
-          label="Payment Method"
-          name="paymentMethod"
-          value={ paymentMethod }
-          onChange={ handleChange }
-          defaultValue="Money"
-        >
-          <MenuItem value="Money">Money</MenuItem>
-          <MenuItem value="Credit Card">Credit Card</MenuItem>
-          <MenuItem value="Debit Card">Debit Card</MenuItem>
-        </TextField>
+            <Select
+              name="paymentMethod"
+              value={ paymentMethod }
+              handleChange={ handleChange }
+              firstItem="Choose Payment Method"
+              array={ arr }
+            />
 
-        <input
-          type="date"
-          name="date"
-          value={ date }
-          onChange={ handleChange }
-          className="
-            border p-4 mt-4 border-zinc-300 rounde
-            hover:border-black focus:border-blue-700 outline-none
-          "
-        />
+            <Input
+              type="date"
+              name="date"
+              value={ date }
+              handleChange={ handleChange }
+              showError={ showError }
+            />
+          </div>
+          <div className="h-full flex flex-col">
+            {
+              showError && (
+                <Alert text="Complete all fields before adding an expense" />
+              )
+            }
 
-        <button
-          type="button"
-          className="btn btn-outline btn-primary mt-6"
-          onClick={ handleClick }
-        >
-          Add Expense
-        </button>
-      </form>
-    </aside>
+            <button
+              type="button"
+              className="btn btn-outline btn-primary"
+              onClick={ handleClick }
+            >
+              Add Expense
+            </button>
+          </div>
+        </form>
+      </aside>
+      {showError && <Error />}
+    </>
   );
 }
 

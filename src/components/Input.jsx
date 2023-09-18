@@ -1,14 +1,15 @@
 // eslint-disable-next-line react/prop-types
-function Input({ type, placeholder, labelText }) {
+function Input({ type, name, value, placeholder = '', handleChange, showError }) {
   return (
-    <label className="flex flex-col">
-      { labelText }
-      <input
-        type={ type }
-        placeholder={ placeholder }
-        className="input input-bordered input-primary w-full max-w-xs"
-      />
-    </label>
+    <input
+      type={ type }
+      name={ name }
+      value={ value }
+      placeholder={ placeholder }
+      className={ `input input-bordered input-primary mb-5 w-full
+      ${showError === name && 'input-error sm:input-primary'}` }
+      onChange={ handleChange }
+    />
   );
 }
 
