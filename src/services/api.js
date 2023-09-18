@@ -4,10 +4,10 @@ const fetchApi = async () => {
     if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
     }
-    const currencies = await response.json();
-    const currenciesFiltered = Object.keys(currencies)
+    const exchangeRates = await response.json();
+    const currenciesFiltered = Object.keys(exchangeRates)
       .filter((currency) => currency !== 'USDT');
-    return currenciesFiltered;
+    return { currenciesFiltered, exchangeRates };
   } catch (err) {
     console.error(err.message);
   }

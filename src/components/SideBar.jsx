@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import {
   addExpense,
   loadingCurrencies,
+  loadingExchangeRates,
   showErrorExpense,
   toggleSideBar,
 } from '../Redux/actions/expenseActions';
@@ -19,13 +20,13 @@ function SideBar() {
     description: '',
     paymentMethod: '',
     date: '',
-    id: 0,
+    id: 1,
   });
   const { valor, currency, description, paymentMethod, date } = form;
   const dispatch = useDispatch();
   const {
     showSideBar,
-    exchangeRates,
+    currencies,
     showError } = useSelector((state) => state.Expense);
 
   const handleChange = ({ target: { name, value } }) => {
@@ -36,8 +37,9 @@ function SideBar() {
   };
 
   const initialLoading = async () => {
-    const data = await fetchApi();
-    dispatch(loadingCurrencies(data));
+    const { currenciesFiltered, exchangeRates } = await fetchApi();
+    dispatch(loadingCurrencies(currenciesFiltered));
+    dispatch(loadingExchangeRates(exchangeRates));
   };
 
   useEffect(() => {
@@ -56,14 +58,14 @@ function SideBar() {
   const handleClick = () => {
     const isFormValid = verifyForm(); // Verifica se o formulário é válido
     if (isFormValid) {
-      dispatch(addExpense(form));
+      const expense = { ...form };
+      dispatch(addExpense(expense));
       setForm({
         valor: '',
         currency: '',
         description: '',
         paymentMethod: '',
         date: '',
-        id: form.id + 1,
       });
       dispatch(toggleSideBar(false));
     }
@@ -74,7 +76,7 @@ function SideBar() {
   return (
     <>
       <aside
-        className={ `w-full sm:flex
+        className={ `w-full lg:flex
       transition-filter duration-300 ease-out
       ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}
       ${!showSideBar && 'hidden'}` }
@@ -95,7 +97,7 @@ function SideBar() {
               value={ currency }
               handleChange={ handleChange }
               firstItem="Choose a currency"
-              array={ exchangeRates }
+              array={ currencies }
             />
 
             <Input

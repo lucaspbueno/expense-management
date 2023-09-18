@@ -18,7 +18,10 @@ function Header() {
     <header>
       <div className="navbar bg-primary text-black">
         <div className="flex-none">
-          <button className="btn btn-square btn-ghost" onClick={ onToggleSideBar }>
+          <button
+            className="btn btn-square btn-ghost lg:pointer-events-none"
+            onClick={ onToggleSideBar }
+          >
             <Hamburger toggled={ showSideBar } easing="ease-in" />
             {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg> */}
           </button>
