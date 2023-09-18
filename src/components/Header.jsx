@@ -20,7 +20,7 @@ function Header() {
       >
         <Hamburger toggled={ showSideBar } easing="ease-in" />
       </button>
-      <h1 className="btn btn-ghost normal-case text-xl">daisyUI</h1>
+      <h1 className="btn btn-ghost normal-case text-xl">Expense Management</h1>
     </header>
   );
 }
