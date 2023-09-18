@@ -11,7 +11,7 @@ function Select({ name, value, handleChange, firstItem, array }) {
       ${typeForm === 'edit' && 'text-warning'}` }
       onChange={ handleChange }
     >
-      <option disabled>{firstItem}</option>
+      <option disabled value="">{firstItem}</option>
       {
         array && array.map((currencyState) => (
           <option

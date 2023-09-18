@@ -3,7 +3,7 @@ import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import Error from '../components/Error';
-import Filters from '../components/Filters';
+/* import Filters from '../components/Filters'; */
 
 function Expense() {
   const { showError, isBlur } = useSelector((state) => state.Expense);
