@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '../images/IconsBoostrap/EditIcon.svg';
 import DeleteIcon from '../images/IconsBoostrap/DeleteIcon.svg';
-import { deleteExpenses } from '../Redux/actions/expenseActions';
+import {
+  deleteExpenses,
+  editTypeForm,
+} from '../Redux/actions/expenseActions';
 
 function ExpenseTable() {
   const dispatch = useDispatch();
@@ -9,6 +12,10 @@ function ExpenseTable() {
 
   const deleteExpense = (id) => {
     dispatch(deleteExpenses(id));
+  };
+
+  const edit = (id) => {
+    dispatch(editTypeForm('edit', id));
   };
 
   return (
@@ -44,7 +51,7 @@ function ExpenseTable() {
                   <td>{ paymentMethod }</td>
                   <td>{ date }</td>
                   <td className="teste">
-                    <button type="button" onClick={ () => {} }>
+                    <button type="button" onClick={ () => edit(id) }>
                       <img src={ EditIcon } alt="Pencil Icon" />
                     </button>
 

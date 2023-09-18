@@ -4,6 +4,8 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const SHOW_ERROR_EXPENSE = 'SHOW_ERROR_EXPENSE';
 export const LOADING_EXCHANGE_RATES = 'LOADING_EXCHANGE_RATES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_FORM = 'EDIT_FORM';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export const toggleSideBar = (payload) => ({
   type: TOGGLE_SIDEBAR,
@@ -33,6 +35,19 @@ export const loadingExchangeRates = (payload) => ({
 export const deleteExpenses = (id) => ({
   type: DELETE_EXPENSE,
   id,
+});
+
+export const editTypeForm = (typeForm, id = '') => ({
+  type: EDIT_FORM,
+  payload: {
+    typeForm,
+    id,
+  },
+});
+
+export const editExpense = (payload) => ({
+  type: EDIT_EXPENSE,
+  payload,
 });
 
 export const calculateNextExpenseId = (expenses) => {

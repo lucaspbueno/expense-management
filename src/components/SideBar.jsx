@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import {
   addExpense,
+  editExpense,
+  editTypeForm,
   loadingCurrencies,
   loadingExchangeRates,
   showErrorExpense,
@@ -27,7 +29,7 @@ function SideBar() {
   const {
     showSideBar,
     currencies,
-    showError } = useSelector((state) => state.Expense);
+    showError, typeForm, expenses, idToEdit } = useSelector((state) => state.Expense);
 
   const handleChange = ({ target: { name, value } }) => {
     setForm({
@@ -38,6 +40,11 @@ function SideBar() {
 
   const initialLoading = async () => {
     const { currenciesFiltered, exchangeRates } = await fetchApi();
+    console.log(
+      'currenciesFiltered:',
+      currenciesFiltered,
+    );
+    console.log('exchangeRates:', exchangeRates);
     dispatch(loadingCurrencies(currenciesFiltered));
     dispatch(loadingExchangeRates(exchangeRates));
   };
@@ -45,6 +52,15 @@ function SideBar() {
   useEffect(() => {
     initialLoading();
   }, []);
+
+  useEffect(() => {
+    if (typeof idToEdit !== 'string') {
+      const expense = expenses.find(({ id }) => id === idToEdit);
+      setForm({
+        ...expense,
+      });
+    }
+  }, [idToEdit]);
 
   const verifyForm = () => {
     if (!valor || !currency || !description || !paymentMethod || !date) {
@@ -55,20 +71,30 @@ function SideBar() {
     return true;
   };
 
+  const clearForm = () => {
+    setForm({
+      valor: '',
+      currency: '',
+      description: '',
+      paymentMethod: '',
+      date: '',
+    });
+  };
+
   const handleClick = () => {
     const isFormValid = verifyForm(); // Verifica se o formulário é válido
     if (isFormValid) {
       const expense = { ...form };
       dispatch(addExpense(expense));
-      setForm({
-        valor: '',
-        currency: '',
-        description: '',
-        paymentMethod: '',
-        date: '',
-      });
+      clearForm();
       dispatch(toggleSideBar(false));
     }
+  };
+
+  const handleEdit = () => {
+    dispatch(editExpense(form));
+    clearForm();
+    dispatch(editTypeForm('add'));
   };
 
   const arr = ['Money', 'Credit Card', 'Debit Card'];
@@ -131,13 +157,13 @@ function SideBar() {
                 <Alert text="Complete all fields before adding an expense" />
               )
             }
-
             <button
               type="button"
-              className="btn btn-outline btn-primary"
-              onClick={ handleClick }
+              className={ `btn btn-outline btn-primary
+              ${typeForm === 'edit' && 'btn-warning'}` }
+              onClick={ typeForm === 'add' ? handleClick : handleEdit }
             >
-              Add Expense
+              { `${typeForm === 'add' ? 'Add Expense' : 'Edit Expense'}`}
             </button>
           </div>
         </form>
