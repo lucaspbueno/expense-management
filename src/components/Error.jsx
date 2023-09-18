@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { toggleBlur, toggleError } from '../Redux/actions/loginActions';
+import { showErrorExpense } from '../Redux/actions/expenseActions';
 
 function Error() {
   const dispatch = useDispatch();
   const handleCLick = () => {
     dispatch(toggleError(false));
     dispatch(toggleBlur());
+    dispatch(showErrorExpense(false));
   };
 
   return (

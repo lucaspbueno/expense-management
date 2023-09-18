@@ -36,7 +36,7 @@ function LoginForm() {
       dispatch(toggleError(true));
       dispatch(toggleBlur());
     } else {
-      navigate('/');
+      navigate('/Expense');
     }
   };
 
@@ -47,7 +47,7 @@ function LoginForm() {
           `h-screen w-full flex flex-col justify-between p-4
           transition-filter duration-300 ease-out
           ${isBlur && 'sm:blur-[7px] sm:bg-lightGray'}
-          ${showError && 'pointer-events-none'}
+          ${showError && 'sm:pointer-events-none'}
           lg:justify-center items-center`
         }
       >

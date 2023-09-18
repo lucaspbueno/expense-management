@@ -24,6 +24,7 @@ function InitialPage() {
     hiddenError();
   }, []);
 
+  /*  items-center */
   return (
     <section
       className="h-screen w-full flex flex-col p-4 lg:justify-center lg:p-0"
