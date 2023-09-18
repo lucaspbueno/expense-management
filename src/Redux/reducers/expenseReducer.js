@@ -99,4 +99,4 @@ const expenseReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-module.exports = expenseReducer;
+export default expenseReducer;
