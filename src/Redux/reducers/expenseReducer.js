@@ -19,6 +19,7 @@ const INITIAL_STATE = {
   typeForm: 'add',
   idToEdit: '',
   expenses: [],
+  expensesForFilter: [],
   currencies: [],
   exchangeRates: {},
 };
@@ -49,6 +50,7 @@ const expenseReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, newExpense],
+      expensesForFilter: [...state.expenses, newExpense],
     };
   case LOADING_EXCHANGE_RATES:
     return {
@@ -57,16 +59,18 @@ const expenseReducer = (state = INITIAL_STATE, action) => {
     };
   case DELETE_EXPENSE:
     const expensesFiltered = state.expenses.filter(({ id }) => id !== action.id);
+    const res = expensesFiltered.reduce((acc, expense, index) => {
+      expense = {
+        ...expense,
+        id: index + 1,
+      };
+      acc.push(expense);
+      return acc;
+    }, []);
     return {
       ...state,
-      expenses: expensesFiltered.reduce((acc, expense, index) => {
-        expense = {
-          ...expense,
-          id: index + 1,
-        };
-        acc.push(expense);
-        return acc;
-      }, []),
+      expenses: res,
+      expensesForFilter: res,
     };
   case EDIT_FORM:
     return {
@@ -75,18 +79,20 @@ const expenseReducer = (state = INITIAL_STATE, action) => {
       idToEdit: action.payload.id,
     };
   case EDIT_EXPENSE:
+    const result = state.expenses.reduce((acc, expense) => {
+      if (expense.id === state.idToEdit) {
+        expense = {
+          ...action.payload,
+          id: state.idToEdit,
+        };
+      }
+      acc.push(expense);
+      return acc;
+    }, []);
     return {
       ...state,
-      expenses: state.expenses.reduce((acc, expense) => {
-        if (expense.id === state.idToEdit) {
-          expense = {
-            ...action.payload,
-            id: state.idToEdit,
-          };
-        }
-        acc.push(expense);
-        return acc;
-      }, []),
+      expenses: result,
+      expensesForFilter: result,
     };
   default:
     return state;

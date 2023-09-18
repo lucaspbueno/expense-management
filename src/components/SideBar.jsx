@@ -107,7 +107,7 @@ function SideBar() {
       ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}
       ${!showSideBar && 'hidden'}` }
       >
-        <form className="h-screen flex flex-col justify-between p-5">
+        <form className="flex flex-col p-5">
           <div>
             <Input
               type="number"
@@ -151,7 +151,7 @@ function SideBar() {
               showError={ showError }
             />
           </div>
-          <div className="h-full flex flex-col">
+          <div className="flex flex-col">
             {
               showError && (
                 <Alert text="Complete all fields before adding an expense" />
