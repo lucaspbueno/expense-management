@@ -22,4 +22,4 @@ const loginReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-module.exports = loginReducer;
+export default loginReducer;
