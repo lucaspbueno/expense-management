@@ -10,6 +10,11 @@
 ## Pelo navegador:
 Para acessar o projeto em seu navegaor, basta apenas acessar o link abaixo:
   - https://expense-management-ppv78s1o8-lucaspbueno.vercel.app
+  - Insira um email e um nome e pronto!!
+    - Email válido: email@gmail.com
+    - Senha válido: 123456
+
+* Deve ser uma senha com no mínimo 6 caracteres e um email generico apenas seguindo o padrão de qualquerCoisa@gmail.com   
 
 ## Pela sua máquina:
 Para acessar o projeto em sua máquina, basta seguir os passos a baixo:
