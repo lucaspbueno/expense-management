@@ -1,25 +1,21 @@
 import { useSelector } from 'react-redux';
-import ExpenseTable from '../components/ExpenseTable';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
+import ExpenseTable from '../components/ExpenseTable';
 import Error from '../components/Error';
-/* import Filters from '../components/Filters'; */
+import '../Css/Expense.css';
 
 function Expense() {
   const { showError, isBlur } = useSelector((state) => state.Expense);
   return (
     <section
-      className={ `transition-filter duration-300 ease-out
+      className={ `h-screen w-screen overflow-hidden
+      transition-filter duration-300 ease-out
       ${isBlur && 'lg:filter-blur-[7px] lg:bg-lightGray'}` }
     >
-      <header>
-        <Header />
-      </header>
-      <main className="w-screen flex">
-        <section>
-          <SideBar />
-          {/* <Filters /> */}
-        </section>
+      <Header />
+      <main className="h-[93%] flex">
+        <SideBar />
         <ExpenseTable />
       </main>
       { showError && <Error /> }

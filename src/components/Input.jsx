@@ -9,7 +9,7 @@ function Input({ type, name, value, placeholder = '', handleChange, showError })
       name={ name }
       value={ value }
       placeholder={ placeholder }
-      className={ `input input-bordered input-primary mb-5 w-full
+      className={ `input input-bordered input-primary mb-5
       ${showError === name && 'input-error sm:input-primary'}
       ${typeof idToEdit !== 'string' && 'text-warning'}` }
       onChange={ handleChange }

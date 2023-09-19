@@ -102,13 +102,16 @@ function SideBar() {
   return (
     <>
       <aside
-        className={ `w-full lg:flex
-      transition-filter duration-300 ease-out
-      ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}
-      ${!showSideBar && 'hidden'}` }
+        className={ `w-full bg-indigo-400
+        flex flex-col p-10
+        transition-filter duration-300 ease-out
+        lg:w-2/5
+        ${showError && 'lg:blur-[7px] lg:pointer-events-none lg:bg-lightGray'}
+        ${!showSideBar && 'hidden lg:flex'}
+      ` }
       >
-        <form className="flex flex-col p-5">
-          <div>
+        <form className="h-full flex flex-col justify-between">
+          <div className="flex flex-col">
             <Input
               type="number"
               name="valor"
@@ -159,7 +162,7 @@ function SideBar() {
             }
             <button
               type="button"
-              className={ `btn btn-outline btn-primary
+              className={ `btn btn-outline bg-violet-950 text-white border-0
               ${typeForm === 'edit' && 'btn-warning'}` }
               onClick={ typeForm === 'add' ? handleClick : handleEdit }
             >

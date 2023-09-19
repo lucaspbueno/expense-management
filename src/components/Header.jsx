@@ -13,14 +13,23 @@ function Header() {
   };
 
   return (
-    <header className="flex items-center bg-primary text-black">
+    <header className="h-[7%] flex items-center bg-violet-950 text-white shadow-lg p-5">
       <button
         className="btn btn-square btn-ghost lg:pointer-events-none lg:hidden"
         onClick={ onToggleSideBar }
       >
-        <Hamburger toggled={ showSideBar } easing="ease-in" />
+        <Hamburger
+          toggled={ showSideBar }
+          easing="ease-in"
+          direction="right"
+          size={ 20 }
+        />
       </button>
-      <h1 className="btn btn-ghost normal-case text-xl">Expense Management</h1>
+      <h1
+        className="btn btn-ghost normal-case text-base sm:text-lg"
+      >
+        Expense Management
+      </h1>
     </header>
   );
 }

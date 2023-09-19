@@ -7,7 +7,7 @@ function Select({ name, value, handleChange, firstItem, array }) {
     <select
       name={ name }
       value={ value }
-      className={ `select select-primary mb-5 w-full
+      className={ `select select-primary mb-5
       ${typeForm === 'edit' && 'text-warning'}` }
       onChange={ handleChange }
     >
