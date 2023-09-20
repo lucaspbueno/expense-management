@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBlur, toggleError } from '../Redux/actions/loginActions';
 import LoginImg from '../images/LoginScreen.svg';
-import '../Css/LoginImg.css';
 
 function InitialPage() {
   const navigate = useNavigate();

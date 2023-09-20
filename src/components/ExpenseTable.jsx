@@ -11,12 +11,16 @@ import {
 } from '../Redux/actions/expenseActions';
 
 function ExpenseTable() {
+  const { typeForm } = useSelector((state) => state.Expense);
   const dispatch = useDispatch();
   const {
     showSideBar, expensesForFilter,
   } = useSelector((state) => state.Expense);
 
   const deleteExpense = (id) => {
+    if (typeForm === 'edit') {
+      dispatch(editTypeForm('add'));
+    }
     dispatch(deleteExpenses(id));
   };
 
@@ -37,6 +41,7 @@ function ExpenseTable() {
               <th scope="col" className="hidden sm:table-cell">Id</th>
               <th scope="col">Value</th>
               <th scope="col" className="hidden m:table-cell">Currency</th>
+              <th scope="col" className="hidden sm:table-cell">Tag</th>
               <th scope="col" className="hidden sm:table-cell">Description</th>
               <th scope="col">Payment Method</th>
               <th scope="col" className="hidden sm:table-cell">Date</th>
@@ -47,12 +52,13 @@ function ExpenseTable() {
             {
               expensesForFilter
               && expensesForFilter.map((
-                { id, valor, currency, description, paymentMethod, date },
+                { id, valor, currency, tag, description, paymentMethod, date },
               ) => (
                 <tr key={ description } >
                   <td className="hidden sm:table-cell">{id}</td>
                   <td >{valor}</td>
                   <td className="hidden m:table-cell">{currency}</td>
+                  <td className="hidden sm:table-cell">{tag}</td>
                   <td className="hidden sm:table-cell">{description}</td>
                   <td>{paymentMethod}</td>
                   <td className="hidden sm:table-cell">{date}</td>

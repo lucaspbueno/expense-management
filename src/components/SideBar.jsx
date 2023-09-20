@@ -24,7 +24,7 @@ function SideBar() {
     date: '',
     id: 1,
   });
-  const { valor, currency, description, paymentMethod, date } = form;
+  const { valor, currency, tag, description, paymentMethod, date } = form;
   const dispatch = useDispatch();
   const {
     showSideBar,
@@ -54,6 +54,7 @@ function SideBar() {
       currency: '',
       description: '',
       paymentMethod: '',
+      tag: '',
       date: '',
     });
   };
@@ -70,7 +71,7 @@ function SideBar() {
   }, [idToEdit]);
 
   const verifyForm = () => {
-    if (!valor || !currency || !description || !paymentMethod || !date) {
+    if (!valor || !currency || !tag || !description || !paymentMethod || !date) {
       dispatch(showErrorExpense(true));
       return false;
     }
@@ -95,7 +96,8 @@ function SideBar() {
     dispatch(toggleSideBar(false));
   };
 
-  const arr = ['Money', 'Credit Card', 'Debit Card'];
+  const arrPaymentMethod = ['Money', 'Credit Card', 'Debit Card'];
+  const Tags = ['Food', 'Leisure', 'Work', 'Transport', 'Health'];
 
   return (
     <>
@@ -138,8 +140,16 @@ function SideBar() {
               name="paymentMethod"
               value={ paymentMethod }
               handleChange={ handleChange }
-              firstItem="Choose Payment Method"
-              array={ arr }
+              firstItem="Choose payment method"
+              array={ arrPaymentMethod }
+            />
+
+            <Select
+              name="tag"
+              value={ tag }
+              handleChange={ handleChange }
+              firstItem="Choose the tag"
+              array={ Tags }
             />
 
             <Input

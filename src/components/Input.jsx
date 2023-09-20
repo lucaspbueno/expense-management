@@ -9,7 +9,7 @@ function Input({ type, name, value, placeholder = '', handleChange }) {
       name={ name }
       value={ value }
       placeholder={ placeholder }
-      className={ `input input-bordered  mb-5
+      className={ `input input-bordered mb-5
       ${typeof idToEdit !== 'string' && 'text-warning'}
       ${!showError && 'input-primary'}
       ` }
