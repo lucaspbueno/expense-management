@@ -1,14 +1,17 @@
 import Hamburger from 'hamburger-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSideBar } from '../Redux/actions/expenseActions';
+import { editTypeForm, toggleSideBar } from '../Redux/actions/expenseActions';
 
 function Header() {
   const dispatch = useDispatch();
 
-  const { showSideBar } = useSelector((state) => state.Expense);
+  const { showSideBar, typeForm } = useSelector((state) => state.Expense);
 
   const onToggleSideBar = () => {
-    if (showSideBar) return dispatch(toggleSideBar(false));
+    if (showSideBar || typeForm === 'edit') {
+      dispatch(editTypeForm('add'));
+      return dispatch(toggleSideBar(false));
+    }
     dispatch(toggleSideBar(true));
   };
 

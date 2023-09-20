@@ -7,6 +7,7 @@ import DeleteIcon from '../images/IconsBoostrap/DeleteIcon.svg';
 import {
   deleteExpenses,
   editTypeForm,
+  toggleSideBar,
 } from '../Redux/actions/expenseActions';
 
 function ExpenseTable() {
@@ -21,6 +22,7 @@ function ExpenseTable() {
 
   const edit = (id) => {
     dispatch(editTypeForm('edit', id));
+    dispatch(toggleSideBar(true));
   };
 
   return (

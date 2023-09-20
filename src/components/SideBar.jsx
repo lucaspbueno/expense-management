@@ -48,12 +48,24 @@ function SideBar() {
     initialLoading();
   }, []);
 
+  const clearForm = () => {
+    setForm({
+      valor: '',
+      currency: '',
+      description: '',
+      paymentMethod: '',
+      date: '',
+    });
+  };
+
   useEffect(() => {
     if (typeof idToEdit !== 'string') {
       const expense = expenses.find(({ id }) => id === idToEdit);
       setForm({
         ...expense,
       });
+    } else {
+      clearForm();
     }
   }, [idToEdit]);
 
@@ -64,16 +76,6 @@ function SideBar() {
     }
     dispatch(showErrorExpense(false));
     return true;
-  };
-
-  const clearForm = () => {
-    setForm({
-      valor: '',
-      currency: '',
-      description: '',
-      paymentMethod: '',
-      date: '',
-    });
   };
 
   const handleClick = () => {
