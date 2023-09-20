@@ -92,6 +92,7 @@ function SideBar() {
     dispatch(editExpense(form));
     clearForm();
     dispatch(editTypeForm('add'));
+    dispatch(toggleSideBar(false));
   };
 
   const arr = ['Money', 'Credit Card', 'Debit Card'];
