@@ -1,24 +1,25 @@
+/* eslint-disable react/prop-types */
 import { useDispatch } from 'react-redux';
 import { toggleBlur, toggleError } from '../Redux/actions/loginActions';
 import { showErrorExpense } from '../Redux/actions/expenseActions';
 
-function Error() {
+function Error({ text }) {
   const dispatch = useDispatch();
   const handleCLick = () => {
     dispatch(toggleError(false));
-    dispatch(toggleBlur());
+    dispatch(toggleBlur(false));
     dispatch(showErrorExpense(false));
   };
 
   return (
     <section
       className="
-        h-2/5 sm:flex flex-col justify-around items-center p-2 bg-white
-        absolute inset-x-16 bottom-20 rounded-2xl blur-none lg:inset-x-1/4 hidden
+        h-2/5 hidden sm:flex flex-col justify-around items-center p-2 bg-white
+        absolute inset-x-16 bottom-20 rounded-2xl blur-none lg:inset-x-1/4
       "
     >
       <h1>Oops...</h1>
-      <p>Email and/or password are not valid.</p>
+      <p>{ text }</p>
       <button
         type="button"
         className="

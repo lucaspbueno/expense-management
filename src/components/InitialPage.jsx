@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import LoginImg from '../images/LoginScreen.svg';
 import { toggleBlur, toggleError } from '../Redux/actions/loginActions';
+import LoginImg from '../images/LoginScreen.svg';
+import '../Css/LoginImg.css';
 
 function InitialPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { showError } = useSelector((state) => state.Login);
+  const { showError, isBlur } = useSelector((state) => state.Login);
   const handleCLick = () => {
     navigate('/Login');
   };
@@ -16,7 +17,7 @@ function InitialPage() {
     const rule = 640;
     if (window.innerWidth > rule && showError) {
       dispatch(toggleError(false));
-      dispatch(toggleBlur());
+      dispatch(toggleBlur(false));
     }
   };
 
@@ -27,16 +28,23 @@ function InitialPage() {
   /*  items-center */
   return (
     <section
-      className="h-screen w-full flex flex-col p-4 lg:justify-center lg:p-0"
+      className={ ` 
+    h-screen w-full flex flex-col p-4 lg:justify-center lg:p-0
+    transition-filter duration-300 ease-in-out
+    ${isBlur && 'sm:blur-[7px] sm:bg-lightGray'}
+    ` }
     >
       <img
         src={ LoginImg }
         alt="Login screen background"
-        className="h-full mb-16 sm:mb-20 sm:h-1/2 md:mb-30"
+        className={ `h-full mb-16 sm:mb-20 sm:h-1/2 md:mb-30 lg:mb-0
+          transition-filter duration-300 ease-in-out
+          ${isBlur && 'error'}
+        ` }
       />
       <article className="h-full flex flex-col justify-between lg:hidden">
         <div>
-          <h1 className="text-5xl sm:text-6xl">Login</h1>
+          <h1 className="text-4xl mb-2 sm:text-5xl">Login</h1>
           <h2
             className="text-3xl sm:text-4xl"
           >

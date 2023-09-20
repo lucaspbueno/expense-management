@@ -40,11 +40,6 @@ function SideBar() {
 
   const initialLoading = async () => {
     const { currenciesFiltered, exchangeRates } = await fetchApi();
-    console.log(
-      'currenciesFiltered:',
-      currenciesFiltered,
-    );
-    console.log('exchangeRates:', exchangeRates);
     dispatch(loadingCurrencies(currenciesFiltered));
     dispatch(loadingExchangeRates(exchangeRates));
   };
@@ -118,7 +113,6 @@ function SideBar() {
               value={ valor }
               placeholder="Value"
               handleChange={ handleChange }
-              showError={ showError }
             />
 
             <Select
@@ -135,7 +129,6 @@ function SideBar() {
               value={ description }
               placeholder="Description"
               handleChange={ handleChange }
-              showError={ showError }
             />
 
             <Select
@@ -151,7 +144,6 @@ function SideBar() {
               name="date"
               value={ date }
               handleChange={ handleChange }
-              showError={ showError }
             />
           </div>
           <div className="flex flex-col">
@@ -171,7 +163,7 @@ function SideBar() {
           </div>
         </form>
       </aside>
-      {showError && <Error />}
+      {showError && <Error text="Complete all fields before adding an expense" />}
     </>
   );
 }

@@ -34,8 +34,10 @@ function LoginForm() {
   const handleClick = () => {
     if (validateCredentials()) {
       dispatch(toggleError(true));
-      dispatch(toggleBlur());
+      dispatch(toggleBlur(true));
     } else {
+      dispatch(toggleError(false));
+      dispatch(toggleBlur(false));
       navigate('/Expense');
     }
   };
@@ -45,13 +47,13 @@ function LoginForm() {
       <form
         className={
           `h-screen w-full flex flex-col justify-between p-4
-          transition-filter duration-300 ease-out
+          transition-filter duration-300 ease-in-out
           ${isBlur && 'sm:blur-[7px] sm:bg-lightGray'}
           ${showError && 'sm:pointer-events-none'}
           lg:justify-center items-center`
         }
       >
-        <span className="w-full flex flex-col text-xl xl:items-center lg:text-2xl">
+        <span className="w-full flex flex-col text-xl xl:items-center lg:text-xl">
           <label className="form-control flex flex-col xl:w-9/12">
             Email:
             <label className="input-group input-group-lg">
@@ -111,7 +113,7 @@ function LoginForm() {
           Login
         </button>
       </form>
-      { showError && <Error /> }
+      { showError && <Error text="Email and/or password are not valid." /> }
     </>
   );
 }

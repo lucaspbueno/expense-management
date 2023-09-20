@@ -7,14 +7,14 @@ function Login() {
   const { showError, isBlur } = useSelector((state) => state.Login);
   return (
     <section
-      className={ `flex transition-filter duration-300 ease-out
-      ${isBlur && 'sm:filter-blur-[7px] sm:bg-lightGray'}` }
+      className={ `flex transition-filter duration-300 ease-in-out
+      ${isBlur && 'lg:filter-blur-[7px] lg:bg-lightGray'}` }
     >
       <InitialPage />
       <article className="w-screen hidden lg:flex">
         <LoginForm />
       </article>
-      { showError && <Error /> }
+      { showError && <Error text="Email and/or password are not valid." /> }
     </section>
   );
 }

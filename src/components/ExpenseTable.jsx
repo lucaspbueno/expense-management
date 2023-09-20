@@ -12,7 +12,7 @@ import {
 function ExpenseTable() {
   const dispatch = useDispatch();
   const {
-    showSideBar, expensesForFilter, showError,
+    showSideBar, expensesForFilter,
   } = useSelector((state) => state.Expense);
 
   const deleteExpense = (id) => {
@@ -26,11 +26,10 @@ function ExpenseTable() {
   return (
     <div
       className={ `w-full flex justify-center p-4
-        transition-filter duration-300 ease-out ${showSideBar && 'hidden lg:flex'}
-      ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}` }
+        transition-filter duration-300 ease-out ${showSideBar && 'hidden lg:flex'}` }
     >
       <div className="w-full max-h-[100vh] overflow-y-auto">
-        <table className="table table-striped table-hover table-bordered">
+        <table className="table table-zebra table-hover table-bordered">
           <thead className="table-dark">
             <tr>
               <th scope="col" className="hidden sm:table-cell">Id</th>
@@ -55,7 +54,7 @@ function ExpenseTable() {
                   <td className="hidden sm:table-cell">{description}</td>
                   <td>{paymentMethod}</td>
                   <td className="hidden sm:table-cell">{date}</td>
-                  <td className="teste">
+                  <td>
                     <button type="button" onClick={ () => edit(id) }>
                       <img src={ EditIcon } alt="Pencil Icon" />
                     </button>

@@ -2,13 +2,14 @@ import { useSelector } from 'react-redux';
 
 /* eslint-disable react/prop-types */
 function Select({ name, value, handleChange, firstItem, array }) {
-  const { typeForm } = useSelector((state) => state.Expense);
+  const { typeForm, showError } = useSelector((state) => state.Expense);
   return (
     <select
       name={ name }
       value={ value }
-      className={ `select select-primary mb-5
-      ${typeForm === 'edit' && 'text-warning'}` }
+      className={ `select mb-5
+      ${typeForm === 'edit' && 'text-warning'}
+      ${!showError && 'select-primary'}` }
       onChange={ handleChange }
     >
       <option disabled value="">{firstItem}</option>

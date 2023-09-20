@@ -15,7 +15,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
   case TOGGLE_BLUR:
     return {
       ...state,
-      isBlur: !state.isBlur,
+      isBlur: action.payload,
     };
   default:
     return state;
