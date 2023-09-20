@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
   ],
@@ -11,7 +12,7 @@ module.exports = {
       },
       screens: {
         p: '425px',
-        m: '430px',
+        m: '535px',
         sm: '640px', // Media query para telas até 320px
         md: '768px', // Media query para telas até 375px
         lg: '1024px', // Exemplo de novo breakpoint para telas até 768px

@@ -39,9 +39,9 @@ function SideBar() {
   };
 
   const initialLoading = async () => {
-    const { currenciesFiltered, exchangeRates } = await fetchApi();
-    dispatch(loadingCurrencies(currenciesFiltered));
-    dispatch(loadingExchangeRates(exchangeRates));
+    const { currenciesWithBRL, exchangeRatesWithBRL } = await fetchApi();
+    dispatch(loadingCurrencies(currenciesWithBRL));
+    dispatch(loadingExchangeRates(exchangeRatesWithBRL));
   };
 
   useEffect(() => {
