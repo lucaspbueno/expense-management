@@ -13,9 +13,7 @@
 </div>
 
 ## Sobre o projeto:
-  -É uma aplicação focada no conceito de CRUD, criada em React.js utilizando o
-  create-react-app, para estilo da página foi usado o Tailwind e o DaisyUi,
-  para as rotas o React Router e para gerenciar o estado foi utilizado o Redux.
+  Este projeto visa oferecer ao usuário todas as funcionalidades CRUD, permitindo que ele gerencie suas despesas. Isso inclui a capacidade de visualizar suas despesas em um gráfico, adicionar novas despesas, editá-las ou excluí-las. Além disso, o    projeto fornece informações úteis sobre o contexto das despesas do usuário, auxiliando-o em tomadas de decisões futuras. Ele permite analisar os dados e identificar despesas que podem ser eliminadas, por exemplo.
 
   ** O back-end e o banco de dados dessa aplicação não foram feitos.
 
