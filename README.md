@@ -21,7 +21,7 @@
 
 ## Como iniciar o projeto?
 
-## Pelo navegador:
+### Pelo navegador:
 Para acessar o projeto em seu navegaor, basta apenas acessar o link abaixo:
   - [https://expense-management-ppv78s1o8-lucaspbueno.vercel.app](https://expense-management-indol.vercel.app/)
   - Insira um email e um nome e pronto!!
@@ -30,7 +30,7 @@ Para acessar o projeto em seu navegaor, basta apenas acessar o link abaixo:
 
 * Deve ser uma senha com no mínimo 6 caracteres e um email generico apenas seguindo o padrão de qualquerCoisa@gmail.com   
 
-## Pela sua máquina:
+### Pela sua máquina:
 Para acessar o projeto em sua máquina, basta seguir os passos a baixo:
 - Acesse o terminal e digite o comando:
   - git clone git@github.com:lucaspbueno/expense-management.git
