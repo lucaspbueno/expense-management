@@ -11,6 +11,7 @@ const {
   calculateNextExpenseId,
   EDIT_FORM,
   EDIT_EXPENSE,
+  APPLY_FILTER,
 } = require('../actions/expenseActions');
 
 const INITIAL_STATE = {
@@ -93,6 +94,12 @@ const expenseReducer = (state = INITIAL_STATE, action) => {
       ...state,
       expenses: result,
       expensesForFilter: result,
+    };
+  case APPLY_FILTER:
+    return {
+      ...state,
+      expenses: action.payload,
+      expensesForFilter: action.payload,
     };
   default:
     return state;

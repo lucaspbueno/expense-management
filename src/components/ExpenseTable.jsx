@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-tag-spacing */
 /* eslint-disable react/jsx-max-depth */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '../images/IconsBoostrap/EditIcon.svg';
 import DeleteIcon from '../images/IconsBoostrap/DeleteIcon.svg';
 import {
+  applyFilter,
   deleteExpenses,
   editTypeForm,
   toggleSideBar,
@@ -14,8 +15,9 @@ function ExpenseTable() {
   const { typeForm } = useSelector((state) => state.Expense);
   const dispatch = useDispatch();
   const {
-    showSideBar, expensesForFilter, exchangeRates,
-  } = useSelector((state) => state.Expense);
+    Expense: { showSideBar, expensesForFilter, exchangeRates },
+    Filters: { paymentMethodFilter },
+  } = useSelector((state) => state);
 
   const deleteExpense = (id) => {
     if (typeForm === 'edit') {
@@ -28,6 +30,12 @@ function ExpenseTable() {
     dispatch(editTypeForm('edit', id));
     dispatch(toggleSideBar(true));
   };
+
+  useEffect(() => {
+    const result = expensesForFilter
+      .filter(({ paymentMethod }) => paymentMethod === paymentMethodFilter);
+    dispatch(applyFilter(result));
+  }, [paymentMethodFilter]);
 
   return (
     <div

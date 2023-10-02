@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import ExpenseTable from '../components/ExpenseTable';
 import Error from '../components/Error';
+import Filters from '../components/Filters';
 
 function Expense() {
   const { showError, isBlur } = useSelector((state) => state.Expense);
@@ -16,7 +17,10 @@ function Expense() {
         ${showError && 'sm:blur-[7px] sm:pointer-events-none sm:bg-lightGray'}` }
       >
         <SideBar />
-        <ExpenseTable />
+        <section className="w-full ">
+          <Filters />
+          <ExpenseTable />
+        </section>
       </main>
       { showError && <Error text="Complete all fields before adding an expense" /> }
     </section>

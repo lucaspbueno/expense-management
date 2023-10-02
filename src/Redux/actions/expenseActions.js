@@ -6,6 +6,7 @@ export const LOADING_EXCHANGE_RATES = 'LOADING_EXCHANGE_RATES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const EDIT_FORM = 'EDIT_FORM';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const APPLY_FILTER = 'APPLY_FILTER';
 
 export const toggleSideBar = (payload) => ({
   type: TOGGLE_SIDEBAR,
@@ -54,3 +55,8 @@ export const calculateNextExpenseId = (expenses) => {
   const ids = expenses.map((expense) => expense.id);
   return ids.length === 0 ? 1 : Math.max(...ids) + 1;
 };
+
+export const applyFilter = (payload) => ({
+  type: APPLY_FILTER,
+  payload,
+});
